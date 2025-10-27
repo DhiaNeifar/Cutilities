@@ -21,11 +21,12 @@ Node *append(Node *head, int value);
 Node *removeNode(Node* head, int value);
 Node *pop(Node *head);
 Node *removeByIndex(Node* head, int index);
-size_t getLength(Node *head);
-int getMax(Node *head);
-int getMin(Node *head);
-double getAverage(Node *head);
+size_t getLength(const Node *head);
+int getMax(const Node *head);
+int getMin(const Node *head);
+double getAverage(const Node *head);
 Node *join(Node *head1, Node *head2);
-int *toArray(Node *head);
+int *toArray(const Node *head);
+Node *insertNode(Node *head, size_t index, int value);
 
 #endif // LINKEDLIST_H

@@ -3,6 +3,10 @@ project(utilities C)
 
 set(CMAKE_C_STANDARD 17)
 
+# Enable Testing using CTest
+include(CTest)
+enable_testing()
+
 # Include header files
 include_directories(include)
 
@@ -20,3 +24,6 @@ add_executable(main main.c)
 
 # Link the main executable with the utilities library
 target_link_libraries(main PRIVATE utilities)
+
+# Include tests folder
+add_subdirectory(tests)

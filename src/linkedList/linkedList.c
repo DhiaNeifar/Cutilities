@@ -5,7 +5,7 @@
 // filename: linkedList.c
 
 
-#include "linkedList.h"
+#include "../../include/linkedList.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -26,18 +26,6 @@ Node *initLinkedList(Node* next, const int value) {
     return head;
 }
 
-Node *delLinkedList(Node *head) {
-    Node *prev = NULL;
-    Node *current = head;
-    while (current != NULL) {
-        prev = current;
-        current = current->next;
-        free(prev);
-    }
-    prev = NULL;
-    return current;
-}
-
 Node *createLinkedList(const int *array, const int n) {
     if (n == 0) {return NULL;}
     Node *head = initLinkedList(NULL, array[0]);
@@ -48,6 +36,18 @@ Node *createLinkedList(const int *array, const int n) {
         current = current->next;
     }
     return head;
+}
+
+Node *delLinkedList(Node *head) {
+    Node *prev = NULL;
+    Node *current = head;
+    while (current != NULL) {
+        prev = current;
+        current = current->next;
+        free(prev);
+    }
+    prev = NULL;
+    return current;
 }
 
 void iterateLinkedList(const Node *head) {
@@ -93,6 +93,7 @@ Node *pop(Node *head) {
         tail = tail->next;
     }
     if (prev != NULL) prev->next = NULL;
+    printf("Popped Value %d\n", tail->value);
     return tail;
 }
 
@@ -169,4 +170,19 @@ int *toArray(const Node *head) {
         head = head->next;
     }
     return ptr;
+}
+
+Node *insertNode(Node *head, const size_t index, const int value) {
+    if (index == 0) {
+        return initLinkedList(head, value);
+    }
+    int i = 0;
+    Node *curr = head;
+    while (i++ < index && curr != NULL) {
+        curr = curr->next;
+    }
+    if (curr == NULL) {printf("Error! index exceeds length of List!\n"); return head;}
+    Node *new_node = initLinkedList(curr->next, value);
+    curr->next = new_node;
+    return head;
 }
